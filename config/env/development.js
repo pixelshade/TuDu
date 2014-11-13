@@ -1,7 +1,7 @@
 'use strict';
 
 module.exports = {
-	db: 'mongodb://localhost/tudu-dev',
+	db: 'mongodb://lolo:tazkypass@dogen.mongohq.com:10048/todo-database',
 	app: {
 		title: 'TuDu - Development Environment'
 	},

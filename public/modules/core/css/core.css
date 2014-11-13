@@ -13,3 +13,11 @@
 .ng-valid.ng-dirty {
 	border-color: #78FA89;
 }
+
+.big-caption{
+    font-size: 2em;
+}
+
+body{
+    background-color: #eeeeee;
+}
