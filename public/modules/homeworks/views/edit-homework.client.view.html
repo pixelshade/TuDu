@@ -5,14 +5,62 @@
     <div class="col-md-12">
         <form class="form-horizontal" data-ng-submit="update()" novalidate>
             <fieldset>
-                <div class="form-group">
-                    <label class="control-label" for="name">Name</label>
-                    <div class="controls">
-                        <input type="text" data-ng-model="homework.name" id="name" class="form-control" placeholder="Name" required>
+                <!--<div class="form-group">-->
+                    <!--<label class="control-label" for="name">Name</label>-->
+                    <!--<div class="controls">-->
+                        <!--<input type="text" data-ng-model="homework.homework.name" id="name" class="form-control" placeholder="Name" required>-->
+                    <!--</div>-->
+                <!--</div>-->
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label class="control-label" for="name">Name</label>
+
+                        <div class="controls">
+                            <input type="text" data-ng-model="homework.name" id="name" class="form-control"
+                                   placeholder="Name"
+                                   required>
+                        </div>
                     </div>
-                </div>
-                <div class="form-group">
-                    <input type="submit" value="Update" class="btn btn-default">
+                    <div class="form-group">
+                        <label class="control-label" for="course">Course</label>
+                        <select class="form-control" data-ng-model="homework.course">
+                            <option  id="course" ng-repeat="course in courses">{{course.name}}</option>
+                        </select>
+                    </div>
+                    <div ng-controller="DatepickerCtrl" class="form-group">
+                        <label class="control-label" for="deadline">Deadline</label>
+
+                        <p class="input-group">
+                            <input type="text" class="form-control" id="deadline" datepicker-popup="{{format}}"
+                                   data-ng-model="homework.deadline" is-open="opened"
+                                    datepicker-options="dateOptions"
+                                   date-disabled="disabled(date, mode)" ng-required="true"
+                                   close-text="Close"/>
+                                            <span class="input-group-btn">
+                                                <button type="button" class="btn btn-default" ng-click="open($event)"><i
+                                                        class="glyphicon glyphicon-calendar"></i></button>
+                                            </span>
+                        </p>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label" for="url">Url</label>
+
+                        <div class="controls">
+                            <input type="text" data-ng-model="homework.url" id="url" class="form-control" placeholder="Url">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label" for="description">Description</label>
+
+                        <div class="controls">
+                            <input type="text" data-ng-model="homework.description" id="description" class="form-control"
+                                   placeholder="Description"
+                                   required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" value="Update" class="btn btn-success">
+                    </div>
                 </div>
 				<div data-ng-show="error" class="text-danger">
 					<strong data-ng-bind="error"></strong>
