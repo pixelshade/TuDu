@@ -22,12 +22,9 @@
                         </div>
                         <div class="form-group">
                             <label class="control-label" for="course">Course</label>
-
-                            <div class="controls">
-                                <input type="text" data-ng-model="course" id="course" class="form-control"
-                                       placeholder="Course"
-                                       required>
-                            </div>
+                            <select class="form-control" data-ng-model="course">
+                                <option  id="course" ng-repeat="course in courses">{{course.name}}</option>
+                            </select>
                         </div>
                         <div ng-controller="DatepickerCtrl" class="form-group">
                             <label class="control-label" for="deadline">Deadline</label>

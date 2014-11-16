@@ -6,6 +6,7 @@
 var mongoose = require('mongoose'),
 	errorHandler = require('./errors.server.controller'),
 	Homework = mongoose.model('Homework'),
+    Course = mongoose.model('Course'),
 	_ = require('lodash');
 
 /**
@@ -14,6 +15,19 @@ var mongoose = require('mongoose'),
 exports.create = function(req, res) {
 	var homework = new Homework(req.body);
 	homework.user = req.user;
+
+
+//    Course.find().sort('name').populate('user', 'displayName').exec(function(err, courses) {
+//        if (err) {
+//            return res.status(400).send({
+//                message: errorHandler.getErrorMessage(err)
+//            });
+//        } else {
+//            res.jsonp(courses);
+//        }
+//    });
+
+
 
 	homework.save(function(err) {
 		if (err) {
@@ -72,8 +86,8 @@ exports.delete = function(req, res) {
 /**
  * List of Homeworks
  */
-exports.list = function(req, res) { 
-	Homework.find().sort('-created').populate('user', 'displayName').exec(function(err, homeworks) {
+exports.list = function(req, res) {
+	Homework.find().sort('deadline').populate('user', 'displayName').exec(function(err, homeworks) {
 		if (err) {
 			return res.status(400).send({
 				message: errorHandler.getErrorMessage(err)
@@ -87,7 +101,7 @@ exports.list = function(req, res) {
 /**
  * Homework middleware
  */
-exports.homeworkByID = function(req, res, next, id) { 
+exports.homeworkByID = function(req, res, next, id) {
 	Homework.findById(id).populate('user', 'displayName').exec(function(err, homework) {
 		if (err) return next(err);
 		if (! homework) return next(new Error('Failed to load Homework ' + id));

@@ -1,19 +1,39 @@
-<section data-ng-controller="HomeworksController" data-ng-init="find()">
+<section data-ng-controller="HomeworksListController" data-ng-init="find()">
     <div class="page-header">
         <h1>Homeworks</h1>
     </div>
     <div class="list-group">
-        <a data-ng-repeat="homework in homeworks" data-ng-href="#!/homeworks/{{homework._id}}" class="list-group-item">
-			<small class="list-group-item-text">
-				Posted on
-				<span data-ng-bind="homework.created | date:'medium'"></span>
-				by
-				<span data-ng-bind="homework.user.displayName"></span>
-			</small>
-			<h4 class="list-group-item-heading" data-ng-bind="homework.name"></h4>
-        </a>
+        <div data-ng-repeat="homework in homeworks" class="list-group-item">
+            <a data-ng-href="#!/homeworks/{{homework._id}}">
+                <h4 class="list-group-item-heading">{{homework.name}}
+                    <small>{{homework.course}}</small>
+                </h4>
+            </a>
+            Deadline: {{homework.daysLeft}} days remaining <small>({{homework.deadline}})</small>
+            <br>
+
+            <div class="progress">
+
+                <div class="progress-bar progress-bar-success" role="progressbar"
+                     aria-valuenow="{{homework.percentage}}" aria-valuemin="0" aria-valuemax="100"
+                     style="width: {{homework.percentage}}%">
+                    <span class="sr-only">{{homework.daysLeft}} days remaining</span>
+                </div>
+            </div>
+            <label>
+                <input type="checkbox" value="">
+                Done!
+            </label>
+
+            <!--<small class="list-group-item-text">-->
+            <!--Posted on-->
+            <!--<span data-ng-bind="homework.created | date:'medium'"></span>-->
+            <!--by-->
+            <!--<span data-ng-bind="homework.user.displayName"></span>-->
+            <!--</small>-->
+        </div>
     </div>
     <div class="alert alert-warning text-center" data-ng-hide="!homeworks.$resolved || homeworks.length">
-    	No Homeworks yet, why don't you <a href="/#!/homeworks/create">create one</a>?
+        No Homeworks yet, why don't you <a href="/#!/homeworks/create">create one</a>?
     </div>
 </section>
